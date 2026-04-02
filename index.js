@@ -1,3 +1,5 @@
+localStorage.clear()
+
 let items = [
 	"Сделать проектную работу",
 	"Полить цветы",
@@ -13,7 +15,6 @@ const inputElement = document.querySelector(".to-do__input");
 
 function loadTasks() {
 	const savedTasks = localStorage.getItem('tasks');
-
 	if (savedTasks) {
 		return JSON.parse(saveTasks);
 	}
@@ -29,8 +30,14 @@ function createItem(item) {
     const deleteButton = clone.querySelector(".to-do__item-button_type_delete");
     const duplicateButton = clone.querySelector(".to-do__item-button_type_duplicate");
     const editButton = clone.querySelector(".to-do__item-button_type_edit");
+	const likeButton = clone.querySelector(".to-do__item-button_type_like");
 
     textElement.textContent = item;
+
+	likeButton.addEventListener('click', function () {
+    	likeButton.classList.toggle('to-do__item-button_type_like_active');
+      
+  })
 
 	deleteButton.addEventListener('click', function() {
         clone.remove();
