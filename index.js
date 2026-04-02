@@ -41,17 +41,17 @@ function createItem(item) {
 
 	deleteButton.addEventListener('click', function() {
         clone.remove();
-        const items = getTasksFromDOM();
-        saveTasks(items);
+        const allItems = getTasksFromDOM();
+        saveTasks(allItems);
     });
 
 	duplicateButton.addEventListener('click', function() {
-		const itemName = textElement.textContent;
-		const newItem = createItem(itemName);
-		listElement.prepend(newItem);
+		const itemOldName = textElement.textContent;
+		const newItemName = createItem(itemOldName);
+		listElement.prepend(newItemName);
 
-		const items = getTasksFromDOM();
-		saveTasks(items);
+		const itemsUpdated = getTasksFromDOM();
+		saveTasks(itemsUpdated);
 	});
 
     editButton.addEventListener('click', function() {
@@ -62,8 +62,8 @@ function createItem(item) {
     textElement.addEventListener('blur', function() {
         textElement.setAttribute('contenteditable', 'false');
         
-        const items = getTasksFromDOM();
-        saveTasks(items);
+        const itemsUpdated = getTasksFromDOM();
+        saveTasks(itemsUpdated);
     });
 
     return clone;
@@ -71,12 +71,12 @@ function createItem(item) {
 
 function getTasksFromDOM() {
 	const itemsNamesElements = document.querySelectorAll('.to-do__item-text');
-	const tasks = [];
-	itemsNamesElements.forEach(function(item){
-		tasks.push(item.textContent)
+	const tasksAll = [];
+	itemsNamesElements.forEach(function(el){
+		tasksAll.push(el.textContent)
 	});
 
-	return tasks;
+	return tasksAll;
 }
 
 function saveTasks(tasks) {
